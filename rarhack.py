@@ -31,14 +31,14 @@ class RarCracker():
             .format(persent, hours_passed, minutes_passed, seconds_passed,
                     hours_left, minutes_left, seconds_left, 1 / avg_time_per_iter, word))
       try:
-        file.extractall(pwd=word)
+        file.extractall(pwd=word, path='./extract')
         print('\nCracked: {}'.format(word))
         savefile = open('cracked_files.txt', 'a+')
         savefile.write(
             '{}:"{}":{:02.0f}:{:02.0f}:{:02.0f}\n'.format(filename, word, hours_passed, minutes_passed, seconds_passed))
         break
       except rarfile.RarWrongPassword:
-        print("WRONG PASS")
         pass
-
+      except:
+        raise Exception('Unknown exception')
 
